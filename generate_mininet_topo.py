@@ -1,8 +1,5 @@
 #Takes in the Mininet Topology and generates the zebra and bgpd files which 
 #are needed for setting up Quagga
-#Comment out write_output function if you do not want to make changes to the original topo
-
-
 
 
 
@@ -88,7 +85,7 @@ def write_output(filename,cities):
 	file_to_open=open(filename,'r')
 	file_to_write=open(filename+'_output','w')
 	for line in file_to_open:
-		if len(line.strip())>0 and "self.addLink(" in line:
+		if len(line.strip())>0 and "self.addLink(" in line and "_h" not in line:
 			original_line=line.strip()
 			line=original_line.split(',')
 			location_1=line[0]
