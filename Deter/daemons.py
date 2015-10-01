@@ -1,0 +1,10 @@
+#Generates the Daemon file for Quagga
+file_to_write=open('daemons.conf','w')
+file_to_write.write('zebra=yes\n')
+file_to_write.write('bgpd=yes\n')
+file_to_write.write('ospfd=no\n')
+file_to_write.write('ospf6d=no\n')
+file_to_write.write('ripd=no\n')
+file_to_write.write('ripngd=no\n')
+file_to_write.write('isisd=no\n')
+file_to_write.close()
