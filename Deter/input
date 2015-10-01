@@ -1,0 +1,15 @@
+#sample input file
+        PaloAlto = self.addSwitch( 's0' )
+        LosAngeles = self.addSwitch( 's1' )
+        Denver = self.addSwitch( 's2' )
+        Chicago = self.addSwitch( 's3' )
+        Vienna = self.addSwitch( 's4' )
+        Atlanta = self.addSwitch( 's5' )
+
+        self.addLink( PaloAlto , LosAngeles, bw=10, delay='0.597240049312ms')
+        self.addLink( PaloAlto , Denver, bw=10, delay='0.986648701391ms')
+        self.addLink( PaloAlto , Vienna, bw=10, delay='0.89858974953ms')
+        self.addLink( LosAngeles , Atlanta, bw=10, delay='0.950672943707ms')
+        self.addLink( Denver , Chicago, bw=10, delay='1.35964770335ms')
+        self.addLink( Chicago , Vienna, bw=10, delay='1.30980440458ms')
+        self.addLink( Vienna , Atlanta, bw=10, delay='0.586207246466ms')
