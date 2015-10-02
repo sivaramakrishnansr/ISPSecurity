@@ -66,12 +66,17 @@ for city,neighbors in city_relation.iteritems():
 
 #20.0+city+1/2
 
-for city,number in cities.iteritems():
-	file_to_write.write("set link"+str(link_counter)+" [$ns duplex-link $"+str(city)+" $controller 1000000Kb 0ms DropTail]\n")
-	file_to_write.write("tb-set-ip-link $"+str(city)+" $link"+str(link_counter)+" 20.0."+str(cities[city])+".1\n")
-	file_to_write.write("tb-set-ip-link $controller $link"+str(link_counter)+" 20.0."+str(cities[city])+".2\n")
-	link_counter=link_counter+1
-		
+#for city,number in cities.iteritems():
+#	file_to_write.write("set link"+str(link_counter)+" [$ns duplex-link $"+str(city)+" $controller 1000000Kb 0ms DropTail]\n")
+#	file_to_write.write("tb-set-ip-link $"+str(city)+" $link"+str(link_counter)+" 20.0."+str(cities[city])+".1\n")
+#	file_to_write.write("tb-set-ip-link $controller $link"+str(link_counter)+" 20.0."+str(cities[city])+".2\n")
+#	link_counter=link_counter+1
+
+#tb-set-node-startcmd $Vienna "sudo python /proj/SENSS/start.py vienna"
+for key,value in cities.iteritems():
+	file_to_write.write("tb-set-node-startcmd $"+str(key)+" \"sudo python /proj/SENSS/start.py "+str(key.lower())+"\"\n")
+
+
 file_to_write.write("$ns rtproto Manual\n")
 file_to_write.write("$ns run\n")
 
@@ -79,9 +84,9 @@ file_to_write.close()
 
 
 
-
+'''
 for key,value in bgpd.iteritems():
-	file_to_write=open("conf/zebra-"+str(key)+".conf","w")
+	file_to_write=open("/users/satyaman/conf/"+str(key.lower())+".conf","w")
 	file_to_write.write("hostname "+str(key)+"\n")
 	file_to_write.write("password en\n")
 	file_to_write.write("enable password en\n")
@@ -91,4 +96,4 @@ for key,value in bgpd.iteritems():
 		file_to_write.write(" neighbor "+ip+" remote-as "+str(city_id)+"\n")
 	file_to_write.close()
 
-
+'''
