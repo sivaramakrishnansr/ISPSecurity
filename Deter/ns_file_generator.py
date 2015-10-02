@@ -82,9 +82,6 @@ file_to_write.write("$ns run\n")
 
 file_to_write.close()
 
-
-
-'''
 for key,value in bgpd.iteritems():
 	file_to_write=open("/users/satyaman/conf/"+str(key.lower())+".conf","w")
 	file_to_write.write("hostname "+str(key)+"\n")
@@ -96,4 +93,3 @@ for key,value in bgpd.iteritems():
 		file_to_write.write(" neighbor "+ip+" remote-as "+str(city_id)+"\n")
 	file_to_write.close()
 
-'''
