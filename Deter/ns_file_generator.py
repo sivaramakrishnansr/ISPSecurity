@@ -29,10 +29,10 @@ for line in input_file:
 
 
 file_to_write.write("set controller [$ns node]\n")
-file_to_write.write("tb-set-node-os $controller Ubuntu1204-64-STD\n")
+file_to_write.write("tb-set-node-os $controller Ubuntu1404-64-STD\n")
 for city,value in cities.iteritems():
 	file_to_write.write("set "+city+" [$ns node]\n")
-	file_to_write.write("tb-set-node-os $"+city+" Ubuntu1204-64-STD\n")
+	file_to_write.write("tb-set-node-os $"+city+" Ubuntu1404-64-STD\n")
 
 
 file_to_write.write("\n")
@@ -82,6 +82,9 @@ file_to_write.write("$ns run\n")
 
 file_to_write.close()
 
+
+
+'''
 for key,value in bgpd.iteritems():
 	file_to_write=open("/users/satyaman/conf/"+str(key.lower())+".conf","w")
 	file_to_write.write("hostname "+str(key)+"\n")
@@ -93,3 +96,4 @@ for key,value in bgpd.iteritems():
 		file_to_write.write(" neighbor "+ip+" remote-as "+str(city_id)+"\n")
 	file_to_write.close()
 
+'''
