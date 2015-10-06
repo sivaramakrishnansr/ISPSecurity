@@ -21,7 +21,7 @@ import time
 
 
 host=sys.argv[1]
-password="kru!1ualahomora"
+password=""
 
 db=MySQLdb.connect(host="192.168.3.178",port=3306,user=host,passwd=password)
 cur=db.cursor()
