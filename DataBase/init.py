@@ -54,9 +54,9 @@ def reply_thread(id,connection):
 			connection.send(str(completed))
 			break	
 
-def get_route(request,connection,reply_to_client):
-	while True:     	
-		HOST="losangeles"
+def get_route(HOST,destination,connection,reply_to_client):
+	while True:
+		start_time=time.time()
 		PORT="bgpd"
 		password="en"
 		destination="101.0.0.0"	
@@ -65,7 +65,8 @@ def get_route(request,connection,reply_to_client):
 		print data		
 		tn.write(password+"\r\n")
 		data=''
-		data=tn.read_very_eager()
+		#data=tn.read_very_eager()
+		data=tn.read_some()
 		print data
 		tn.write("sh ip bgp "+str(destination)+"\n")
 		data=tn.read_some()
@@ -89,10 +90,20 @@ def get_route(request,connection,reply_to_client):
                 		neighbor=neighbor.strip().split(' ')[0]
 	
 		print best_weight,neighbor
+		end_time=0
 		if len(neighbor)!=0:
+			end_time=time.time()
+			file_to_write=open('output','a')
+			file_to_write.write("Time taken for server to get the route query-"+str(end_time-start_time)+"\n")
+			file_to_write.close()
+			
 			break
 		time.sleep(0.5)
 	if reply_to_client == True:
+		file_to_write=open('output','a')
+		file_to_write.write("Sending Client an acK-"+str(time.time())+"\n")
+		file_to_write.close()
+
 		connection.send(str(neighbor)+" "+str(best_weight))
 	return best_weight,neighbor
 		
@@ -101,25 +112,101 @@ def get_route(request,connection,reply_to_client):
 
 
 def change_route(request,connection,promote):
-	if promote==True:
-		connection.send("Dummy Promote Route")
+	threads=[]
+	request=eval(request)
+	start_time=time.time()
+	for city,city_id in request.iteritems():
+		threads.append(threading.Thread(target=change_route_thread,args=(city,city_id)))
+	for index,t in enumerate(threads):
+		t.start()
+	[t.join() for t in threads]
+	end_time=time.time()
+	file_to_write=open('output','a')
+	file_to_write.write("Time taken for route change in the server is for all-"+str(end_time-start_time)+"\n")
+	file_to_write.close()
+
+	connection.send("Changed the routes for "+str(len(threads))+" routers")
+
+def change_route_thread(HOST,router):
+	#if promote==True:
+		start_time=time.time()		
+		weight,neighbor=get_route(HOST,'1','1',False)
+		end_time=time.time()
+		file_to_write=open('output','a')
+		file_to_write.write("Time taken to get the weight and the network-"+str(end_time-start_time)+"\n")
+		file_to_write.close()
+		
+		print "Recievd*************",weight,neighbor
+		if int(weight)==0:
+			weight=1567
+		else:
+			weight=int(weight)+1
+		weight=str(weight)
+		start_time=time.time()
+		#router="2"
+		#HOST="losangeles"
+		PORT="bgpd"
+		password="en"
+		router=str(router)
+		tn=telnetlib.Telnet(HOST,PORT)
+		tn.read_until("Password: ")
+		tn.write(password+"\n")
+		data=''
+		data=tn.read_some()
+		tn.write("enable\n")
+		data=''
+		data=tn.read_some()
+		print data
+		tn.write(password+"\n")
+		data=''
+		data=tn.read_some()
+		print data
+		tn.write("config term\n")
+		data=''
+		data=tn.read_some()
+		print data
+		tn.write("router bgp "+router+"\n")
+		data=''
+		data=tn.read_some()
+		print data
+		tn.write("neighbor "+neighbor+" weight "+weight+"\n")
+		data=''
+		data=tn.read_some()
+		print data
+		tn.write("exit\n")
+		data=''
+		data=tn.read_some()
+		print data
+		
+		tn.write("write\n")
+		data=''
+		data=tn.read_some()
+		print data
+
+		tn.write("exit\n")
+		data=''
+		data=tn.read_some()
+		print data
+
+		tn.write("clear ip bgp *\n")
+		data=''
+		data=tn.read_some()
+		print data		
+
+		#connection.send("Route Modified")
+		end_time=time.time()
+		file_to_write=open('output','a')
+		file_to_write.write("Time taken to change the path-"+str(end_time-start_time)+"\n")
+		file_to_write.close()
+		file_to_write=open('output','a')
+		file_to_write.write("Sent ACK to client at-"+str(time.time())+"\n")
+		file_to_write.close()
+		
 		
 
-		#Neighbor whose path which needs to be changed
-		neighbor=1
-		#Adding a larger value
-		weight=1205
-		
-		router="10.1.2.3"
-		
 
-
-
-
-
-	if promote==False:
-		connection.send("Dummy Demote Route")
-
+	#if promote==False:
+	#	connection.send("Dummy Demote Route")
 
 def monitor():	
 	bindsocket = socket.socket()
@@ -134,12 +221,16 @@ def monitor():
 
 		data = connstream.read()
 		data=eval(data)
+		file_to_write=open('output','a')
+		file_to_write.write('Got Client Request-'+str(time.time()))
+		file_to_write.close()
 		for key,value in data.iteritems():
 			type=int(key)
 			request=str(value)
 			completed=0
 			if type==4:
-				client_connection_thread=threading.Thread(target=get_route,args=(request,connstream))
+				#HOST,destination,connection,reply_to_client
+				client_connection_thread=threading.Thread(target=get_route,args=(request,'1',connstream,True))
 				client_connection_thread.start()
 				continue
 			if type==5:
@@ -164,7 +255,7 @@ def monitor():
 
 
 init_database()
-
-print get_route('1','1',False)
+#a={"LosAngeles":2}
+#change_route(str(a),1,1)
 monitor()
 

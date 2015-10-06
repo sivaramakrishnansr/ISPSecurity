@@ -1,6 +1,23 @@
 import os
 import time
 import sys
+
+#Generates the Debian Config file to be Telnet'd from different locations
+file_to_write=open('/etc/quagga/debian.conf','w')
+file_to_write.write('vtysh_enable=yes\n')
+file_to_write.write('zebra_options="  --daemon -A 127.0.0.1"\n')
+file_to_write.write('bgpd_options="   --daemon "\n')
+file_to_write.write('ospfd_options="  --daemon -A 127.0.0.1"\n')
+file_to_write.write('ospf6d_options=" --daemon -A ::1"\n')
+file_to_write.write('ripd_options="   --daemon -A 127.0.0.1"\n')
+file_to_write.write('ripngd_options=" --daemon -A ::1"\n')
+file_to_write.write('isisd_options="  --daemon -A 127.0.0.1"\n')
+file_to_write.write('babeld_options=" --daemon -A 127.0.0.1"\n')
+file_to_write.write('watchquagga_enable=yes\n')
+file_to_write.write('watchquagga_options=(--daemon)\n')
+file_to_write.close()
+
+
 #Generates the Daemon file for Quagga
 file_to_write=open('/etc/quagga/daemons','w')
 file_to_write.write('zebra=yes\n')
@@ -108,4 +125,3 @@ file_to_write.close()
 
 #Restart Quagga
 os.system('sudo service quagga restart')
-	
