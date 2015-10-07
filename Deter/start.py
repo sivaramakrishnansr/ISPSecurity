@@ -1,7 +1,17 @@
 import os
+import subprocess
 import time
 import sys
+import socket
 
+#Change the chosen one IP
+
+ip_list = []
+ais = socket.getaddrinfo("chennai.mediumtopo.senss.isi.deterlab.net",0,0,0,0)
+for result in ais:
+  ip_list.append(result[-1][0])
+ip_list = list(set(ip_list))
+controller_ip=str(ip_list[0])
 #Generates the Debian Config file to be Telnet'd from different locations
 file_to_write=open('/etc/quagga/debian.conf','w')
 file_to_write.write('vtysh_enable=yes\n')
@@ -31,7 +41,7 @@ file_to_write.close()
 
 
 #Generates the BGPD file for quagga
-input_file=open('input','r')
+input_file=open('/proj/SENSS/input','r')
 cities={}
 city_relation={}
 city_counter=1
@@ -97,6 +107,15 @@ os.system('sudo cp /users/satyaman/conf/'+file_name+' /etc/quagga/bgpd.conf')
 os.system('sudo apt-get update')
 os.system('sudo dpkg -i /proj/SENSS/python-netifaces_0.6-2ubuntu1_amd64.deb')
 
+#Installing openvswitch on every node
+proc = subprocess.Popen('apt-get install -y openvswitch-switch', shell=True, stdin=None, stdout=open("/dev/null", "w"), stderr=None, executable="/bin/bash")
+proc.wait()
+
+os.system("sudo ovs-vsctl add-br br0")
+os.system("sudo ovs-vsctl set Bridge br0 protocols=OpenFlow13")
+os.system("sudo ovs-vsctl set-controller br0 tcp:"+controller_ip+":6633")
+
+
 #Need to install openvswitch
 #os.system('sudo apt-get install openvswitch-switch')
 
@@ -122,6 +141,11 @@ for key,value in interface_dict.iteritems():
 
 file_to_write.close()
 
+file_to_write=open('/proj/SENSS/cities','w')
+for key,value in cities.iteritems():
+	file_to_write.write(str(key)+" "+str(value)+"\n")
+file_to_write.close()
+	
 
 #Restart Quagga
 os.system('sudo service quagga restart')

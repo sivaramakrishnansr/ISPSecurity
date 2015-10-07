@@ -21,9 +21,9 @@ import time
 
 
 host=sys.argv[1]
-password=""
+password="kru!1ualahomora"
 
-db=MySQLdb.connect(host="192.168.3.178",port=3306,user=host,passwd=password)
+db=MySQLdb.connect(host="localhost",port=3306,user=host,passwd=password)
 cur=db.cursor()
 
 
@@ -47,15 +47,22 @@ def init_database():
 
 def reply_thread(id,connection):
 	while True:
-		cur.execute("SELECT COMPLETED FROM REQUEST WHERE ID=%s",id)
+		db.commit()
+		cur.execute("SELECT COMPLETED FROM REQUEST WHERE ID=%s",str(id))
+		completed=0
 		for item in cur.fetchall():
 			completed=int(item[0])
-		if completed==0:
+		if completed==1:
+			file_to_write=open('output','a')
+			file_to_write.write('Recieved the input from the controller Sending ACK to the Client-'+str(time.time())+"\n")
+			file_to_write.close()
 			connection.send(str(completed))
 			break	
 
 def get_route(HOST,destination,connection,reply_to_client):
 	while True:
+		HOST=lower(HOST)
+		HOST=HOST+".mediumtopo.senss.isi.deterlab.net"
 		start_time=time.time()
 		PORT="bgpd"
 		password="en"
@@ -129,6 +136,8 @@ def change_route(request,connection,promote):
 
 def change_route_thread(HOST,router):
 	#if promote==True:
+		HOST=lower(HOST)
+		HOST=HOST+".mediumtopo.senss.isi.deterlab.net"
 		start_time=time.time()		
 		weight,neighbor=get_route(HOST,'1','1',False)
 		end_time=time.time()
@@ -210,7 +219,7 @@ def change_route_thread(HOST,router):
 
 def monitor():	
 	bindsocket = socket.socket()
-	bindsocket.bind(('192.168.3.178', 10023))
+	bindsocket.bind(('192.168.1.13', 10023))
 	bindsocket.listen(5)
 	while True:
     		newsocket, fromaddr = bindsocket.accept()
@@ -245,6 +254,10 @@ def monitor():
 			cur.execute("INSERT INTO REQUEST(ID,TYPE,REQUEST,COMPLETED) VALUES(NULL,%s,%s,%s)",(type,request,completed))
 			db.commit()
 			cur.execute('SELECT last_insert_id()')	
+			file_to_write=open('output','a')
+			file_to_write.write('Sent a Client Request-'+str(time.time()))
+			file_to_write.close()
+			
 			for item in cur.fetchall():
 				last_inserted_id=int(item[0])
 			print "Starting Thread for request ",last_inserted_id

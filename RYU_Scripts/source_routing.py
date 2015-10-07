@@ -1,3 +1,4 @@
+import sys
 import time
 from ryu.base import app_manager
 from ryu.controller import ofp_event, dpset
@@ -9,15 +10,26 @@ from ryu.ofproto import ether
 from ryu.lib.packet import packet
 from ryu.lib.packet import ethernet
 from ryu.lib.packet import ether_types
-
+import MySQLdb
 
 import itertools
 class Controller(app_manager.RyuApp):
-    OFP_VERSIONS = [ofproto_v1_3.OFP_VERSION]
 
+	
+    OFP_VERSIONS = [ofproto_v1_3.OFP_VERSION]
+    cur=0
+    db=0
+    id=0	
     def __init__(self, *args, **kwargs):
-        self.datapaths={}
+        global cur,db
+	self.datapaths={}
         self.mac_to_port = {}
+        host="root"
+        password="kru!1ualahomora"
+        db=MySQLdb.connect(host="localhost",port=3306,user=host,passwd=password)
+        cur=db.cursor()
+        cur.execute("USE SENSS")
+
 	super(Controller, self).__init__(*args, **kwargs)
 	
     @set_ev_cls(dpset.EventDP, MAIN_DISPATCHER)
@@ -41,14 +53,28 @@ class Controller(app_manager.RyuApp):
 
     #Thread which monitors the database for new requests	
     def _monitor(self):
+                global cur,db,id 
 		print "Thread Started"
 		while True:
 			if(len(self.datapaths)>0):
 				break
 		while True:
-			for dp in self.datapaths.values():
-				self._request_stats(dp)
-			time.sleep(10)
+			db.commit()
+			#Keep the ID to be 5
+			cur.execute("SELECT ID FROM REQUEST WHERE COMPLETED=0 AND TYPE=1")
+			rows=cur.fetchall()
+			if rows:
+
+				for item in rows:
+					print item
+					id=int(item[0])
+			
+				print "Got a request from the server",time.time(),id,rows
+				
+				
+				for dp in self.datapaths.values():
+					self._request_stats(dp)
+				break
     #Generates a request stat message		
     def _request_stats(self,datapath):
 		src_ip="10.1.2.2"
@@ -69,10 +95,14 @@ class Controller(app_manager.RyuApp):
     #Handles the stat request message
     @set_ev_cls(ofp_event.EventOFPFlowStatsReply,MAIN_DISPATCHER)
     def flow_stats_reply_handler(self,ev):
+		global cur,db,id
 		body=ev.msg.body
 		datapath=ev.msg.datapath.id
 		#print datapath
 		print "Got a Reply",body," this is it"
+		cur.execute('UPDATE REQUEST SET COMPLETED=1 WHERE ID=%s',str(id))
+		db.commit()		
+		print "Sent an ACK to the server",time.time()
 
 		for stat in body:
 			print stat

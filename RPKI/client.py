@@ -8,7 +8,7 @@ ssl_sock = ssl.wrap_socket(s,
                            ca_certs="/proj/SENSS/certificates/server-chain.crt",
                            cert_reqs=ssl.CERT_REQUIRED)
 
-ssl_sock.connect(('192.168.3.178', 10023))
+ssl_sock.connect(('192.168.1.13', 10023))
 end=time.time()
 print "Time to connect via SSL and RPKI",end-start
 
@@ -22,7 +22,7 @@ print "Time to connect via SSL and RPKI",end-start
 
 a={"LosAngeles":2}
 send_array={}
-send_array[4]="LosAngeles"
+send_array[5]=a
 start=time.time()
 print "Sent Server the request at-",time.time()
 ssl_sock.send(str(send_array))
