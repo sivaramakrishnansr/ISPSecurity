@@ -73,6 +73,7 @@ for city,neighbors in city_relation.iteritems():
 	city_port_count[city]=city_port_count[city]+1
 	break
 
+link_counter=link_counter+1
 
 
 for city,neighbors in city_relation.iteritems():
