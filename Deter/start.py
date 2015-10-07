@@ -6,8 +6,11 @@ import socket
 
 #Change the chosen one IP
 
+chosen_city=str(sys.argv[2])
+chosen_city=str(chosen_city.lower())
+
 ip_list = []
-ais = socket.getaddrinfo("chennai.mediumtopo.senss.isi.deterlab.net",0,0,0,0)
+ais = socket.getaddrinfo(chosen_city+".mediumtopo.senss.isi.deterlab.net",0,0,0,0)
 for result in ais:
   ip_list.append(result[-1][0])
 ip_list = list(set(ip_list))
