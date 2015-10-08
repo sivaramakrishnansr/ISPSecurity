@@ -16,7 +16,12 @@ import time
 
 
 
-
+city_dict={}
+file_to_read=open('/proj/SENSS/cities','r')
+for line in file_to_read:
+        line=line.strip()
+        line=line.split(' ')
+        city_dict[line[0]]=line[1]
 
 
 
@@ -59,14 +64,35 @@ def reply_thread(id,connection):
 			connection.send(str(completed))
 			break	
 
-def get_route(HOST,destination,connection,reply_to_client):
+def get_route(request,connection):
+	threads=[]
+	request=eval(request)
+	start_time=time.time()
+	#for city,city_id in request.iteritems():
+	for city in request:
+		threads.append(threading.Thread(target=get_route_thread,args=(city,"1")))
+	for index,t in enumerate(threads):
+		t.start()
+	[t.join() for t in threads]
+	end_time=time.time()
+	file_to_write=open('output','a')
+	file_to_write.write("Time taken for route change in the server is for all-"+str(end_time-start_time)+"\n")
+	file_to_write.close()
+
+	connection.send("Changed the routes for "+str(len(threads))+" routers")
+	file_to_write=open('output','a')
+	file_to_write.write("SENT ACK to client at-"+str(time.time())+"\n")
+	file_to_write.close()
+
+def get_route_thread(HOST,destination):
+	HOST=HOST.lower()
+	HOST=HOST+".mediumtopo.senss.isi.deterlab.net"
 	while True:
-		HOST=lower(HOST)
-		HOST=HOST+".mediumtopo.senss.isi.deterlab.net"
+		print "get_route",HOST
 		start_time=time.time()
 		PORT="bgpd"
 		password="en"
-		destination="101.0.0.0"	
+		destination="105.0.0.0"	
 		tn=telnetlib.Telnet(HOST,PORT)
 		data=tn.read_until("Password: ")
 		print data		
@@ -80,12 +106,22 @@ def get_route(HOST,destination,connection,reply_to_client):
 		print data
 		data=data+tn.read_very_eager()
 		print data
+
+		if "Network not in table" in data:
+			best_weight=0
+			neighbor=0
+			return best_weight,neighbor
 		data=data.split('\n')
 		neighbor=""
 		best_weight=0
+		best_flag=0
+		#Handling the case when there is just one path which is available. In that case the same path is incremented.
+		#Need to fix this point with an error message
+
 		for i in range(0,len(data)):
         		if "best" in data[i]:
-                		metric_line=data[i].split(',')
+                		best_flag=1
+				metric_line=data[i].split(',')
                 		for item in metric_line:
                         		if "weight" in item:
                                 		best_weight=item.split(' ')[2]
@@ -96,22 +132,30 @@ def get_route(HOST,destination,connection,reply_to_client):
                 		print neighbor
                 		neighbor=neighbor.strip().split(' ')[0]
 	
+		if best_flag==0 and neighbor=="":
+			for i in range(0,len(data)):
+			        		if "Origin" in data[i]:
+			                		neighbor=data[i-1]
+                					print neighbor
+                					neighbor=neighbor.strip().split(' ')[0]
+					
+
 		print best_weight,neighbor
 		end_time=0
+		if neighbor=="":
+			best_weight=0
+			neighbor=0
+			return best_weight,neighbor
+		
 		if len(neighbor)!=0:
 			end_time=time.time()
 			file_to_write=open('output','a')
 			file_to_write.write("Time taken for server to get the route query-"+str(end_time-start_time)+"\n")
 			file_to_write.close()
-			
 			break
 		time.sleep(0.5)
-	if reply_to_client == True:
-		file_to_write=open('output','a')
-		file_to_write.write("Sending Client an acK-"+str(time.time())+"\n")
-		file_to_write.close()
 
-		connection.send(str(neighbor)+" "+str(best_weight))
+		#connection.send(str(neighbor)+" "+str(best_weight))
 	return best_weight,neighbor
 		
 
@@ -122,8 +166,9 @@ def change_route(request,connection,promote):
 	threads=[]
 	request=eval(request)
 	start_time=time.time()
-	for city,city_id in request.iteritems():
-		threads.append(threading.Thread(target=change_route_thread,args=(city,city_id)))
+	#for city,city_id in request.iteritems():
+	for city in request:
+		threads.append(threading.Thread(target=change_route_thread,args=(city,city_dict[city])))
 	for index,t in enumerate(threads):
 		t.start()
 	[t.join() for t in threads]
@@ -133,19 +178,31 @@ def change_route(request,connection,promote):
 	file_to_write.close()
 
 	connection.send("Changed the routes for "+str(len(threads))+" routers")
+	file_to_write=open('output','a')
+	file_to_write.write("SENT ACK to client at-"+str(time.time())+"\n")
+	file_to_write.close()
+
 
 def change_route_thread(HOST,router):
+
 	#if promote==True:
-		HOST=lower(HOST)
+		original_HOST=HOST
+		HOST=HOST.lower()
 		HOST=HOST+".mediumtopo.senss.isi.deterlab.net"
+		print "change_route",HOST
 		start_time=time.time()		
-		weight,neighbor=get_route(HOST,'1','1',False)
+		weight,neighbor=get_route_thread(original_HOST,'1')
 		end_time=time.time()
 		file_to_write=open('output','a')
 		file_to_write.write("Time taken to get the weight and the network-"+str(end_time-start_time)+"\n")
 		file_to_write.close()
 		
 		print "Recievd*************",weight,neighbor
+		if int(weight)==0 and neighbor==0:
+			#print "No such paths exist"
+			#return
+			neighbor="105.0.0.0"
+			weight=1567
 		if int(weight)==0:
 			weight=1567
 		else:
@@ -204,12 +261,13 @@ def change_route_thread(HOST,router):
 
 		#connection.send("Route Modified")
 		end_time=time.time()
-		file_to_write=open('output','a')
-		file_to_write.write("Time taken to change the path-"+str(end_time-start_time)+"\n")
-		file_to_write.close()
-		file_to_write=open('output','a')
-		file_to_write.write("Sent ACK to client at-"+str(time.time())+"\n")
-		file_to_write.close()
+
+		#file_to_write=open('output','a')
+		#file_to_write.write("Time taken to change the path-"+str(end_time-start_time)+"\n")
+		#file_to_write.close()
+		#file_to_write=open('output','a')
+		#file_to_write.write("Sent ACK client REQUEST-"+str(time.time())+"\n")
+		#file_to_write.close()
 		
 		
 
@@ -219,7 +277,7 @@ def change_route_thread(HOST,router):
 
 def monitor():	
 	bindsocket = socket.socket()
-	bindsocket.bind(('192.168.1.13', 10023))
+	bindsocket.bind(('192.168.1.9', 10023))
 	bindsocket.listen(5)
 	while True:
     		newsocket, fromaddr = bindsocket.accept()
@@ -228,9 +286,10 @@ def monitor():
 				 certfile="/proj/SENSS/certificates/cacert.pem",
 				 keyfile="/proj/SENSS/certificates/cakey.pem", ssl_version=ssl.PROTOCOL_TLSv1)
 
-		data = connstream.read()
+		data = connstream.read(15000)
 		data=eval(data)
-		file_to_write=open('output','a')
+		print data
+		file_to_write=open('output','w')
 		file_to_write.write('Got Client Request-'+str(time.time()))
 		file_to_write.close()
 		for key,value in data.iteritems():
@@ -239,7 +298,7 @@ def monitor():
 			completed=0
 			if type==4:
 				#HOST,destination,connection,reply_to_client
-				client_connection_thread=threading.Thread(target=get_route,args=(request,'1',connstream,True))
+				client_connection_thread=threading.Thread(target=get_route,args=(request,connstream))
 				client_connection_thread.start()
 				continue
 			if type==5:

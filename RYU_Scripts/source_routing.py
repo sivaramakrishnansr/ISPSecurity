@@ -29,14 +29,16 @@ class Controller(app_manager.RyuApp):
         db=MySQLdb.connect(host="localhost",port=3306,user=host,passwd=password)
         cur=db.cursor()
         cur.execute("USE SENSS")
-
+	self.monitor_thread=hub.spawn(self._monitor)
 	super(Controller, self).__init__(*args, **kwargs)
 	
+
     @set_ev_cls(dpset.EventDP, MAIN_DISPATCHER)
     def switch_in(self, ev):
         dp  = ev.dp
         entered = ev.enter
 	print "Got a connection from a switch",dp.id
+
 
     #Keeps track of all the switches which are entering and leaving the system	
     @set_ev_cls(ofp_event.EventOFPStateChange,[MAIN_DISPATCHER,DEAD_DISPATCHER])
@@ -45,36 +47,46 @@ class Controller(app_manager.RyuApp):
 		if ev.state == MAIN_DISPATCHER:
 			if not datapath.id in self.datapaths:
 				self.datapaths[datapath.id]=datapath
-				self.monitor_thread=hub.spawn(self._monitor)
 
 		elif ev.state == DEAD_DISPATCHER:
 			if datapath.id in self.datapaths:
 				del self.datapaths[datapath.id]
 
+
     #Thread which monitors the database for new requests	
     def _monitor(self):
                 global cur,db,id 
+		time.sleep(8)
 		print "Thread Started"
-		while True:
-			if(len(self.datapaths)>0):
-				break
+		#while True:
+		#	if(len(self.datapaths)==48):
+		#		print "Breaking out"
+		#		break
+		print "Listening for queries"
 		while True:
 			db.commit()
 			#Keep the ID to be 5
-			cur.execute("SELECT ID FROM REQUEST WHERE COMPLETED=0 AND TYPE=1")
+			cur.execute("SELECT ID,REQUEST FROM REQUEST WHERE COMPLETED=0 AND TYPE=1")
 			rows=cur.fetchall()
+			number=0
 			if rows:
-
 				for item in rows:
 					print item
 					id=int(item[0])
-			
+					number=int(item[1])
 				print "Got a request from the server",time.time(),id,rows
-				
-				
-				for dp in self.datapaths.values():
-					self._request_stats(dp)
+				count=0
+				while True:
+					if count==number:
+						cur.execute('UPDATE REQUEST SET COMPLETED=1 WHERE ID=%s',str(id))
+						db.commit()		
+
+						break
+					for dp in self.datapaths.values():
+						self._request_stats(dp)
+					count=count+1
 				break
+
     #Generates a request stat message		
     def _request_stats(self,datapath):
 		src_ip="10.1.2.2"
@@ -92,6 +104,7 @@ class Controller(app_manager.RyuApp):
 		req = ofp_parser.OFPFlowStatsRequest(datapath, 0,ofp.OFPTT_ALL,ofp.OFPP_ANY,ofp.OFPG_ANY,cookie, cookie_mask,match)
    		datapath.send_msg(req)
 		print "Sent A Request"
+
     #Handles the stat request message
     @set_ev_cls(ofp_event.EventOFPFlowStatsReply,MAIN_DISPATCHER)
     def flow_stats_reply_handler(self,ev):
@@ -100,12 +113,13 @@ class Controller(app_manager.RyuApp):
 		datapath=ev.msg.datapath.id
 		#print datapath
 		print "Got a Reply",body," this is it"
-		cur.execute('UPDATE REQUEST SET COMPLETED=1 WHERE ID=%s',str(id))
-		db.commit()		
+		#cur.execute('UPDATE REQUEST SET COMPLETED=1 WHERE ID=%s',str(id))
+		#db.commit()		
 		print "Sent an ACK to the server",time.time()
 
 		for stat in body:
 			print stat
+
 
     def ipv4_to_int(self, string):
         ip = string.split('.')
