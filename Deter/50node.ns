@@ -1,0 +1,311 @@
+set ns [new Simulator]
+source tb_compat.tcl
+# Nodes
+set controller [$ns node]
+tb-set-node-os $controller Ubuntu1404-64-STD
+set client [$ns node]
+tb-set-node-os $client Ubuntu1404-64-STD
+set Portland [$ns node]
+tb-set-node-os $Portland Ubuntu1404-64-STD
+set Dallas [$ns node]
+tb-set-node-os $Dallas Ubuntu1404-64-STD
+set NewYork [$ns node]
+tb-set-node-os $NewYork Ubuntu1404-64-STD
+set Philadelphia [$ns node]
+tb-set-node-os $Philadelphia Ubuntu1404-64-STD
+set Denver [$ns node]
+tb-set-node-os $Denver Ubuntu1404-64-STD
+set Vancouver [$ns node]
+tb-set-node-os $Vancouver Ubuntu1404-64-STD
+set Calgary [$ns node]
+tb-set-node-os $Calgary Ubuntu1404-64-STD
+set Kitchener [$ns node]
+tb-set-node-os $Kitchener Ubuntu1404-64-STD
+set Indianapolis [$ns node]
+tb-set-node-os $Indianapolis Ubuntu1404-64-STD
+set Detroit [$ns node]
+tb-set-node-os $Detroit Ubuntu1404-64-STD
+set Phoenix [$ns node]
+tb-set-node-os $Phoenix Ubuntu1404-64-STD
+set Pittsburgh [$ns node]
+tb-set-node-os $Pittsburgh Ubuntu1404-64-STD
+set Austin [$ns node]
+tb-set-node-os $Austin Ubuntu1404-64-STD
+set Chicago [$ns node]
+tb-set-node-os $Chicago Ubuntu1404-64-STD
+set StLouis [$ns node]
+tb-set-node-os $StLouis Ubuntu1404-64-STD
+set Hartford [$ns node]
+tb-set-node-os $Hartford Ubuntu1404-64-STD
+set Montreal [$ns node]
+tb-set-node-os $Montreal Ubuntu1404-64-STD
+set SaltLakeCity [$ns node]
+tb-set-node-os $SaltLakeCity Ubuntu1404-64-STD
+set LasVegas [$ns node]
+tb-set-node-os $LasVegas Ubuntu1404-64-STD
+set Jacksonville [$ns node]
+tb-set-node-os $Jacksonville Ubuntu1404-64-STD
+set Toronto [$ns node]
+tb-set-node-os $Toronto Ubuntu1404-64-STD
+set LosAngeles [$ns node]
+tb-set-node-os $LosAngeles Ubuntu1404-64-STD
+set NewOrleans [$ns node]
+tb-set-node-os $NewOrleans Ubuntu1404-64-STD
+set Tokyo [$ns node]
+tb-set-node-os $Tokyo Ubuntu1404-64-STD
+set Miami [$ns node]
+tb-set-node-os $Miami Ubuntu1404-64-STD
+set Orlando [$ns node]
+tb-set-node-os $Orlando Ubuntu1404-64-STD
+set Hawaii [$ns node]
+tb-set-node-os $Hawaii Ubuntu1404-64-STD
+set Ottawa [$ns node]
+tb-set-node-os $Ottawa Ubuntu1404-64-STD
+set Stockholm [$ns node]
+tb-set-node-os $Stockholm Ubuntu1404-64-STD
+set Monaco [$ns node]
+tb-set-node-os $Monaco Ubuntu1404-64-STD
+set Buffalo [$ns node]
+tb-set-node-os $Buffalo Ubuntu1404-64-STD
+set Atlanta [$ns node]
+tb-set-node-os $Atlanta Ubuntu1404-64-STD
+set Baltimore [$ns node]
+tb-set-node-os $Baltimore Ubuntu1404-64-STD
+set Houston [$ns node]
+tb-set-node-os $Houston Ubuntu1404-64-STD
+set KansasCity [$ns node]
+tb-set-node-os $KansasCity Ubuntu1404-64-STD
+set SanFrancisco [$ns node]
+tb-set-node-os $SanFrancisco Ubuntu1404-64-STD
+set SanDiego [$ns node]
+tb-set-node-os $SanDiego Ubuntu1404-64-STD
+set Boston [$ns node]
+tb-set-node-os $Boston Ubuntu1404-64-STD
+set Edmonton [$ns node]
+tb-set-node-os $Edmonton Ubuntu1404-64-STD
+set Washington [$ns node]
+tb-set-node-os $Washington Ubuntu1404-64-STD
+set Minneapolis [$ns node]
+tb-set-node-os $Minneapolis Ubuntu1404-64-STD
+set Cologne [$ns node]
+tb-set-node-os $Cologne Ubuntu1404-64-STD
+set London [$ns node]
+tb-set-node-os $London Ubuntu1404-64-STD
+set Cleveland [$ns node]
+tb-set-node-os $Cleveland Ubuntu1404-64-STD
+set Halifax [$ns node]
+tb-set-node-os $Halifax Ubuntu1404-64-STD
+set Seattle [$ns node]
+tb-set-node-os $Seattle Ubuntu1404-64-STD
+set Raleigh [$ns node]
+tb-set-node-os $Raleigh Ubuntu1404-64-STD
+
+#Links
+set link0 [$ns duplex-link $Dallas $client 1000000Kb 100ms DropTail]
+tb-set-ip-link $Dallas $link0 100.1.1.1
+tb-set-ip-link $client $link0 100.1.1.2
+set link1 [$ns duplex-link $Dallas $Atlanta 1000000Kb 0ms DropTail]
+tb-set-ip-link $Dallas $link1 10.14.34.1
+tb-set-ip-link $Atlanta $link1 10.14.34.2
+set link2 [$ns duplex-link $Dallas $Seattle 1000000Kb 0ms DropTail]
+tb-set-ip-link $Dallas $link2 10.14.44.1
+tb-set-ip-link $Seattle $link2 10.14.44.2
+set link3 [$ns duplex-link $Dallas $SanFrancisco 1000000Kb 0ms DropTail]
+tb-set-ip-link $Dallas $link3 10.14.46.1
+tb-set-ip-link $SanFrancisco $link3 10.14.46.2
+set link4 [$ns duplex-link $NewYork $Philadelphia 1000000Kb 0ms DropTail]
+tb-set-ip-link $NewYork $link4 10.5.6.1
+tb-set-ip-link $Philadelphia $link4 10.5.6.2
+set link5 [$ns duplex-link $NewYork $Boston 1000000Kb 0ms DropTail]
+tb-set-ip-link $NewYork $link5 10.5.7.1
+tb-set-ip-link $Boston $link5 10.5.7.2
+set link6 [$ns duplex-link $NewYork $SanFrancisco 1000000Kb 0ms DropTail]
+tb-set-ip-link $NewYork $link6 10.5.46.1
+tb-set-ip-link $SanFrancisco $link6 10.5.46.2
+set link7 [$ns duplex-link $NewYork $Cleveland 1000000Kb 0ms DropTail]
+tb-set-ip-link $NewYork $link7 10.5.22.1
+tb-set-ip-link $Cleveland $link7 10.5.22.2
+set link8 [$ns duplex-link $Philadelphia $Baltimore 1000000Kb 0ms DropTail]
+tb-set-ip-link $Philadelphia $link8 10.6.9.1
+tb-set-ip-link $Baltimore $link8 10.6.9.2
+set link9 [$ns duplex-link $Vancouver $Seattle 1000000Kb 0ms DropTail]
+tb-set-ip-link $Vancouver $link9 10.43.44.1
+tb-set-ip-link $Seattle $link9 10.43.44.2
+set link10 [$ns duplex-link $Calgary $Vancouver 1000000Kb 0ms DropTail]
+tb-set-ip-link $Calgary $link10 10.42.43.1
+tb-set-ip-link $Vancouver $link10 10.42.43.2
+set link11 [$ns duplex-link $Indianapolis $StLouis 1000000Kb 0ms DropTail]
+tb-set-ip-link $Indianapolis $link11 10.27.29.1
+tb-set-ip-link $StLouis $link11 10.27.29.2
+set link12 [$ns duplex-link $Phoenix $SanDiego 1000000Kb 0ms DropTail]
+tb-set-ip-link $Phoenix $link12 10.38.39.1
+tb-set-ip-link $SanDiego $link12 10.38.39.2
+set link13 [$ns duplex-link $Austin $Houston 1000000Kb 0ms DropTail]
+tb-set-ip-link $Austin $link13 10.13.15.1
+tb-set-ip-link $Houston $link13 10.13.15.2
+set link14 [$ns duplex-link $Chicago $Atlanta 1000000Kb 0ms DropTail]
+tb-set-ip-link $Chicago $link14 10.26.34.1
+tb-set-ip-link $Atlanta $link14 10.26.34.2
+set link15 [$ns duplex-link $Chicago $Seattle 1000000Kb 0ms DropTail]
+tb-set-ip-link $Chicago $link15 10.26.44.1
+tb-set-ip-link $Seattle $link15 10.26.44.2
+set link16 [$ns duplex-link $Chicago $SanFrancisco 1000000Kb 0ms DropTail]
+tb-set-ip-link $Chicago $link16 10.26.46.1
+tb-set-ip-link $SanFrancisco $link16 10.26.46.2
+set link17 [$ns duplex-link $Chicago $Minneapolis 1000000Kb 0ms DropTail]
+tb-set-ip-link $Chicago $link17 10.26.49.1
+tb-set-ip-link $Minneapolis $link17 10.26.49.2
+set link18 [$ns duplex-link $Hartford $Buffalo 1000000Kb 0ms DropTail]
+tb-set-ip-link $Hartford $link18 10.8.21.1
+tb-set-ip-link $Buffalo $link18 10.8.21.2
+set link19 [$ns duplex-link $Montreal $Halifax 1000000Kb 0ms DropTail]
+tb-set-ip-link $Montreal $link19 10.1.2.1
+tb-set-ip-link $Halifax $link19 10.1.2.2
+set link20 [$ns duplex-link $Montreal $Ottawa 1000000Kb 0ms DropTail]
+tb-set-ip-link $Montreal $link20 10.1.4.1
+tb-set-ip-link $Ottawa $link20 10.1.4.2
+set link21 [$ns duplex-link $SaltLakeCity $Denver 1000000Kb 0ms DropTail]
+tb-set-ip-link $SaltLakeCity $link21 10.47.48.1
+tb-set-ip-link $Denver $link21 10.47.48.2
+set link22 [$ns duplex-link $LasVegas $Denver 1000000Kb 0ms DropTail]
+tb-set-ip-link $LasVegas $link22 10.33.48.1
+tb-set-ip-link $Denver $link22 10.33.48.2
+set link23 [$ns duplex-link $LasVegas $Phoenix 1000000Kb 0ms DropTail]
+tb-set-ip-link $LasVegas $link23 10.33.38.1
+tb-set-ip-link $Phoenix $link23 10.33.38.2
+set link24 [$ns duplex-link $Jacksonville $Atlanta 1000000Kb 0ms DropTail]
+tb-set-ip-link $Jacksonville $link24 10.17.34.1
+tb-set-ip-link $Atlanta $link24 10.17.34.2
+set link25 [$ns duplex-link $Jacksonville $Orlando 1000000Kb 0ms DropTail]
+tb-set-ip-link $Jacksonville $link25 10.17.18.1
+tb-set-ip-link $Orlando $link25 10.17.18.2
+set link26 [$ns duplex-link $Toronto $Kitchener 1000000Kb 0ms DropTail]
+tb-set-ip-link $Toronto $link26 10.40.41.1
+tb-set-ip-link $Kitchener $link26 10.40.41.2
+set link27 [$ns duplex-link $Toronto $Calgary 1000000Kb 0ms DropTail]
+tb-set-ip-link $Toronto $link27 10.40.42.1
+tb-set-ip-link $Calgary $link27 10.40.42.2
+set link28 [$ns duplex-link $LosAngeles $LasVegas 1000000Kb 0ms DropTail]
+tb-set-ip-link $LosAngeles $link28 10.32.33.1
+tb-set-ip-link $LasVegas $link28 10.32.33.2
+set link29 [$ns duplex-link $LosAngeles $Hawaii 1000000Kb 0ms DropTail]
+tb-set-ip-link $LosAngeles $link29 10.32.37.1
+tb-set-ip-link $Hawaii $link29 10.32.37.2
+set link30 [$ns duplex-link $LosAngeles $SanDiego 1000000Kb 0ms DropTail]
+tb-set-ip-link $LosAngeles $link30 10.32.39.1
+tb-set-ip-link $SanDiego $link30 10.32.39.2
+set link31 [$ns duplex-link $LosAngeles $SanFrancisco 1000000Kb 0ms DropTail]
+tb-set-ip-link $LosAngeles $link31 10.32.46.1
+tb-set-ip-link $SanFrancisco $link31 10.32.46.2
+set link32 [$ns duplex-link $NewOrleans $Orlando 1000000Kb 0ms DropTail]
+tb-set-ip-link $NewOrleans $link32 10.16.18.1
+tb-set-ip-link $Orlando $link32 10.16.18.2
+set link33 [$ns duplex-link $NewOrleans $Miami 1000000Kb 0ms DropTail]
+tb-set-ip-link $NewOrleans $link33 10.16.19.1
+tb-set-ip-link $Miami $link33 10.16.19.2
+set link34 [$ns duplex-link $Tokyo $Seattle 1000000Kb 0ms DropTail]
+tb-set-ip-link $Tokyo $link34 10.31.44.1
+tb-set-ip-link $Seattle $link34 10.31.44.2
+set link35 [$ns duplex-link $Miami $Monaco 1000000Kb 0ms DropTail]
+tb-set-ip-link $Miami $link35 10.19.20.1
+tb-set-ip-link $Monaco $link35 10.19.20.2
+set link36 [$ns duplex-link $Miami $Atlanta 1000000Kb 0ms DropTail]
+tb-set-ip-link $Miami $link36 10.19.34.1
+tb-set-ip-link $Atlanta $link36 10.19.34.2
+set link37 [$ns duplex-link $Orlando $Miami 1000000Kb 0ms DropTail]
+tb-set-ip-link $Orlando $link37 10.18.19.1
+tb-set-ip-link $Miami $link37 10.18.19.2
+set link38 [$ns duplex-link $Ottawa $Toronto 1000000Kb 0ms DropTail]
+tb-set-ip-link $Ottawa $link38 10.4.40.1
+tb-set-ip-link $Toronto $link38 10.4.40.2
+set link39 [$ns duplex-link $Buffalo $Toronto 1000000Kb 0ms DropTail]
+tb-set-ip-link $Buffalo $link39 10.21.40.1
+tb-set-ip-link $Toronto $link39 10.21.40.2
+set link40 [$ns duplex-link $Buffalo $Cleveland 1000000Kb 0ms DropTail]
+tb-set-ip-link $Buffalo $link40 10.21.22.1
+tb-set-ip-link $Cleveland $link40 10.21.22.2
+set link41 [$ns duplex-link $Baltimore $Washington 1000000Kb 0ms DropTail]
+tb-set-ip-link $Baltimore $link41 10.9.10.1
+tb-set-ip-link $Washington $link41 10.9.10.2
+set link42 [$ns duplex-link $Houston $Phoenix 1000000Kb 0ms DropTail]
+tb-set-ip-link $Houston $link42 10.15.38.1
+tb-set-ip-link $Phoenix $link42 10.15.38.2
+set link43 [$ns duplex-link $Houston $NewOrleans 1000000Kb 0ms DropTail]
+tb-set-ip-link $Houston $link43 10.15.16.1
+tb-set-ip-link $NewOrleans $link43 10.15.16.2
+set link44 [$ns duplex-link $KansasCity $Denver 1000000Kb 0ms DropTail]
+tb-set-ip-link $KansasCity $link44 10.28.48.1
+tb-set-ip-link $Denver $link44 10.28.48.2
+set link45 [$ns duplex-link $KansasCity $StLouis 1000000Kb 0ms DropTail]
+tb-set-ip-link $KansasCity $link45 10.28.29.1
+tb-set-ip-link $StLouis $link45 10.28.29.2
+set link46 [$ns duplex-link $Boston $Washington 1000000Kb 0ms DropTail]
+tb-set-ip-link $Boston $link46 10.7.10.1
+tb-set-ip-link $Washington $link46 10.7.10.2
+set link47 [$ns duplex-link $Boston $Hartford 1000000Kb 0ms DropTail]
+tb-set-ip-link $Boston $link47 10.7.8.1
+tb-set-ip-link $Hartford $link47 10.7.8.2
+set link48 [$ns duplex-link $Edmonton $Calgary 1000000Kb 0ms DropTail]
+tb-set-ip-link $Edmonton $link48 10.30.42.1
+tb-set-ip-link $Calgary $link48 10.30.42.2
+set link49 [$ns duplex-link $Washington $Raleigh 1000000Kb 0ms DropTail]
+tb-set-ip-link $Washington $link49 10.10.35.1
+tb-set-ip-link $Raleigh $link49 10.10.35.2
+set link50 [$ns duplex-link $Washington $Stockholm 1000000Kb 0ms DropTail]
+tb-set-ip-link $Washington $link50 10.10.11.1
+tb-set-ip-link $Stockholm $link50 10.10.11.2
+set link51 [$ns duplex-link $Cleveland $Detroit 1000000Kb 0ms DropTail]
+tb-set-ip-link $Cleveland $link51 10.22.25.1
+tb-set-ip-link $Detroit $link51 10.22.25.2
+set link52 [$ns duplex-link $Cleveland $Minneapolis 1000000Kb 0ms DropTail]
+tb-set-ip-link $Cleveland $link52 10.22.49.1
+tb-set-ip-link $Minneapolis $link52 10.22.49.2
+tb-set-node-startcmd $Portland "sudo python /proj/SENSS/start.py portland Dallas"
+tb-set-node-startcmd $Dallas "sudo python /proj/SENSS/start.py dallas Dallas"
+tb-set-node-startcmd $NewYork "sudo python /proj/SENSS/start.py newyork Dallas"
+tb-set-node-startcmd $Philadelphia "sudo python /proj/SENSS/start.py philadelphia Dallas"
+tb-set-node-startcmd $Denver "sudo python /proj/SENSS/start.py denver Dallas"
+tb-set-node-startcmd $Vancouver "sudo python /proj/SENSS/start.py vancouver Dallas"
+tb-set-node-startcmd $Calgary "sudo python /proj/SENSS/start.py calgary Dallas"
+tb-set-node-startcmd $Kitchener "sudo python /proj/SENSS/start.py kitchener Dallas"
+tb-set-node-startcmd $Indianapolis "sudo python /proj/SENSS/start.py indianapolis Dallas"
+tb-set-node-startcmd $Detroit "sudo python /proj/SENSS/start.py detroit Dallas"
+tb-set-node-startcmd $Phoenix "sudo python /proj/SENSS/start.py phoenix Dallas"
+tb-set-node-startcmd $Pittsburgh "sudo python /proj/SENSS/start.py pittsburgh Dallas"
+tb-set-node-startcmd $Austin "sudo python /proj/SENSS/start.py austin Dallas"
+tb-set-node-startcmd $Chicago "sudo python /proj/SENSS/start.py chicago Dallas"
+tb-set-node-startcmd $StLouis "sudo python /proj/SENSS/start.py stlouis Dallas"
+tb-set-node-startcmd $Hartford "sudo python /proj/SENSS/start.py hartford Dallas"
+tb-set-node-startcmd $Montreal "sudo python /proj/SENSS/start.py montreal Dallas"
+tb-set-node-startcmd $SaltLakeCity "sudo python /proj/SENSS/start.py saltlakecity Dallas"
+tb-set-node-startcmd $LasVegas "sudo python /proj/SENSS/start.py lasvegas Dallas"
+tb-set-node-startcmd $Jacksonville "sudo python /proj/SENSS/start.py jacksonville Dallas"
+tb-set-node-startcmd $Toronto "sudo python /proj/SENSS/start.py toronto Dallas"
+tb-set-node-startcmd $LosAngeles "sudo python /proj/SENSS/start.py losangeles Dallas"
+tb-set-node-startcmd $NewOrleans "sudo python /proj/SENSS/start.py neworleans Dallas"
+tb-set-node-startcmd $Tokyo "sudo python /proj/SENSS/start.py tokyo Dallas"
+tb-set-node-startcmd $Miami "sudo python /proj/SENSS/start.py miami Dallas"
+tb-set-node-startcmd $Orlando "sudo python /proj/SENSS/start.py orlando Dallas"
+tb-set-node-startcmd $Hawaii "sudo python /proj/SENSS/start.py hawaii Dallas"
+tb-set-node-startcmd $Ottawa "sudo python /proj/SENSS/start.py ottawa Dallas"
+tb-set-node-startcmd $Stockholm "sudo python /proj/SENSS/start.py stockholm Dallas"
+tb-set-node-startcmd $Monaco "sudo python /proj/SENSS/start.py monaco Dallas"
+tb-set-node-startcmd $Buffalo "sudo python /proj/SENSS/start.py buffalo Dallas"
+tb-set-node-startcmd $Atlanta "sudo python /proj/SENSS/start.py atlanta Dallas"
+tb-set-node-startcmd $Baltimore "sudo python /proj/SENSS/start.py baltimore Dallas"
+tb-set-node-startcmd $Houston "sudo python /proj/SENSS/start.py houston Dallas"
+tb-set-node-startcmd $KansasCity "sudo python /proj/SENSS/start.py kansascity Dallas"
+tb-set-node-startcmd $SanFrancisco "sudo python /proj/SENSS/start.py sanfrancisco Dallas"
+tb-set-node-startcmd $SanDiego "sudo python /proj/SENSS/start.py sandiego Dallas"
+tb-set-node-startcmd $Boston "sudo python /proj/SENSS/start.py boston Dallas"
+tb-set-node-startcmd $Edmonton "sudo python /proj/SENSS/start.py edmonton Dallas"
+tb-set-node-startcmd $Washington "sudo python /proj/SENSS/start.py washington Dallas"
+tb-set-node-startcmd $Minneapolis "sudo python /proj/SENSS/start.py minneapolis Dallas"
+tb-set-node-startcmd $Cologne "sudo python /proj/SENSS/start.py cologne Dallas"
+tb-set-node-startcmd $London "sudo python /proj/SENSS/start.py london Dallas"
+tb-set-node-startcmd $Cleveland "sudo python /proj/SENSS/start.py cleveland Dallas"
+tb-set-node-startcmd $Halifax "sudo python /proj/SENSS/start.py halifax Dallas"
+tb-set-node-startcmd $Seattle "sudo python /proj/SENSS/start.py seattle Dallas"
+tb-set-node-startcmd $Raleigh "sudo python /proj/SENSS/start.py raleigh Dallas"
+$ns rtproto Manual
+$ns run
