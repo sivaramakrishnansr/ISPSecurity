@@ -3,379 +3,570 @@ source tb_compat.tcl
 # Nodes
 set controller [$ns node]
 tb-set-node-os $controller Ubuntu1404-64-STD
+tb-add-node-attribute $controller containers:node_type embedded_pnode
+tb-set-hardware $controller MicroCloud
+
+
 set client [$ns node]
+tb-add-node-attribute $client containers:node_type qemu
 tb-set-node-os $client Ubuntu1404-64-STD
 set Monterrey [$ns node]
+tb-add-node-attribute $Monterrey containers:node_type qemu
 tb-set-node-os $Monterrey Ubuntu1404-64-STD
 set Albany [$ns node]
+tb-add-node-attribute $Albany containers:node_type qemu
 tb-set-node-os $Albany Ubuntu1404-64-STD
 set Kiev [$ns node]
+tb-add-node-attribute $Kiev containers:node_type qemu
 tb-set-node-os $Kiev Ubuntu1404-64-STD
 set Lille [$ns node]
+tb-add-node-attribute $Lille containers:node_type qemu
 tb-set-node-os $Lille Ubuntu1404-64-STD
 set NewYork [$ns node]
+tb-add-node-attribute $NewYork containers:node_type qemu
 tb-set-node-os $NewYork Ubuntu1404-64-STD
 set Santander [$ns node]
+tb-add-node-attribute $Santander containers:node_type qemu
 tb-set-node-os $Santander Ubuntu1404-64-STD
 set Badajoz [$ns node]
+tb-add-node-attribute $Badajoz containers:node_type qemu
 tb-set-node-os $Badajoz Ubuntu1404-64-STD
 set Bremen [$ns node]
+tb-add-node-attribute $Bremen containers:node_type qemu
 tb-set-node-os $Bremen Ubuntu1404-64-STD
 set Newark [$ns node]
+tb-add-node-attribute $Newark containers:node_type qemu
 tb-set-node-os $Newark Ubuntu1404-64-STD
 set Toledo [$ns node]
+tb-add-node-attribute $Toledo containers:node_type qemu
 tb-set-node-os $Toledo Ubuntu1404-64-STD
 set Poiters [$ns node]
+tb-add-node-attribute $Poiters containers:node_type qemu
 tb-set-node-os $Poiters Ubuntu1404-64-STD
 set Zaragoza [$ns node]
+tb-add-node-attribute $Zaragoza containers:node_type qemu
 tb-set-node-os $Zaragoza Ubuntu1404-64-STD
 set BocaRaton [$ns node]
+tb-add-node-attribute $BocaRaton containers:node_type qemu
 tb-set-node-os $BocaRaton Ubuntu1404-64-STD
 set Tulsa [$ns node]
+tb-add-node-attribute $Tulsa containers:node_type qemu
 tb-set-node-os $Tulsa Ubuntu1404-64-STD
 set OklahomaCity [$ns node]
+tb-add-node-attribute $OklahomaCity containers:node_type qemu
 tb-set-node-os $OklahomaCity Ubuntu1404-64-STD
 set Sacramento [$ns node]
+tb-add-node-attribute $Sacramento containers:node_type qemu
 tb-set-node-os $Sacramento Ubuntu1404-64-STD
 set Malmo [$ns node]
+tb-add-node-attribute $Malmo containers:node_type qemu
 tb-set-node-os $Malmo Ubuntu1404-64-STD
 set Paris [$ns node]
+tb-add-node-attribute $Paris containers:node_type qemu
 tb-set-node-os $Paris Ubuntu1404-64-STD
 set Gijon [$ns node]
+tb-add-node-attribute $Gijon containers:node_type qemu
 tb-set-node-os $Gijon Ubuntu1404-64-STD
 set Montreal [$ns node]
+tb-add-node-attribute $Montreal containers:node_type qemu
 tb-set-node-os $Montreal Ubuntu1404-64-STD
 set Coimbra [$ns node]
+tb-add-node-attribute $Coimbra containers:node_type qemu
 tb-set-node-os $Coimbra Ubuntu1404-64-STD
 set Oslo [$ns node]
+tb-add-node-attribute $Oslo containers:node_type qemu
 tb-set-node-os $Oslo Ubuntu1404-64-STD
 set Hamilton [$ns node]
+tb-add-node-attribute $Hamilton containers:node_type qemu
 tb-set-node-os $Hamilton Ubuntu1404-64-STD
 set Atlanta [$ns node]
+tb-add-node-attribute $Atlanta containers:node_type qemu
 tb-set-node-os $Atlanta Ubuntu1404-64-STD
 set Brussels [$ns node]
+tb-add-node-attribute $Brussels containers:node_type qemu
 tb-set-node-os $Brussels Ubuntu1404-64-STD
 set Caen [$ns node]
+tb-add-node-attribute $Caen containers:node_type qemu
 tb-set-node-os $Caen Ubuntu1404-64-STD
 set Tampa [$ns node]
+tb-add-node-attribute $Tampa containers:node_type qemu
 tb-set-node-os $Tampa Ubuntu1404-64-STD
 set Nantes [$ns node]
+tb-add-node-attribute $Nantes containers:node_type qemu
 tb-set-node-os $Nantes Ubuntu1404-64-STD
 set Timisoara [$ns node]
+tb-add-node-attribute $Timisoara containers:node_type qemu
 tb-set-node-os $Timisoara Ubuntu1404-64-STD
 set Nuremberg [$ns node]
+tb-add-node-attribute $Nuremberg containers:node_type qemu
 tb-set-node-os $Nuremberg Ubuntu1404-64-STD
 set LosAngeles [$ns node]
+tb-add-node-attribute $LosAngeles containers:node_type qemu
 tb-set-node-os $LosAngeles Ubuntu1404-64-STD
 set NewOrleans [$ns node]
+tb-add-node-attribute $NewOrleans containers:node_type qemu
 tb-set-node-os $NewOrleans Ubuntu1404-64-STD
 set Mannheim [$ns node]
+tb-add-node-attribute $Mannheim containers:node_type qemu
 tb-set-node-os $Mannheim Ubuntu1404-64-STD
 set Miami [$ns node]
+tb-add-node-attribute $Miami containers:node_type qemu
 tb-set-node-os $Miami Ubuntu1404-64-STD
 set Basel [$ns node]
+tb-add-node-attribute $Basel containers:node_type qemu
 tb-set-node-os $Basel Ubuntu1404-64-STD
 set Dublin [$ns node]
+tb-add-node-attribute $Dublin containers:node_type qemu
 tb-set-node-os $Dublin Ubuntu1404-64-STD
 set Avila [$ns node]
+tb-add-node-attribute $Avila containers:node_type qemu
 tb-set-node-os $Avila Ubuntu1404-64-STD
 set Rome [$ns node]
+tb-add-node-attribute $Rome containers:node_type qemu
 tb-set-node-os $Rome Ubuntu1404-64-STD
 set SanFrancisco [$ns node]
+tb-add-node-attribute $SanFrancisco containers:node_type qemu
 tb-set-node-os $SanFrancisco Ubuntu1404-64-STD
 set Vigo [$ns node]
+tb-add-node-attribute $Vigo containers:node_type qemu
 tb-set-node-os $Vigo Ubuntu1404-64-STD
 set Marseille [$ns node]
+tb-add-node-attribute $Marseille containers:node_type qemu
 tb-set-node-os $Marseille Ubuntu1404-64-STD
 set SantaClara [$ns node]
+tb-add-node-attribute $SantaClara containers:node_type qemu
 tb-set-node-os $SantaClara Ubuntu1404-64-STD
 set Charlotte [$ns node]
+tb-add-node-attribute $Charlotte containers:node_type qemu
 tb-set-node-os $Charlotte Ubuntu1404-64-STD
 set Cincinnati [$ns node]
+tb-add-node-attribute $Cincinnati containers:node_type qemu
 tb-set-node-os $Cincinnati Ubuntu1404-64-STD
 set KapitanAndreevo [$ns node]
+tb-add-node-attribute $KapitanAndreevo containers:node_type qemu
 tb-set-node-os $KapitanAndreevo Ubuntu1404-64-STD
 set Sevilla [$ns node]
+tb-add-node-attribute $Sevilla containers:node_type qemu
 tb-set-node-os $Sevilla Ubuntu1404-64-STD
 set Washington [$ns node]
+tb-add-node-attribute $Washington containers:node_type qemu
 tb-set-node-os $Washington Ubuntu1404-64-STD
 set Minneapolis [$ns node]
+tb-add-node-attribute $Minneapolis containers:node_type qemu
 tb-set-node-os $Minneapolis Ubuntu1404-64-STD
 set McAllen [$ns node]
+tb-add-node-attribute $McAllen containers:node_type qemu
 tb-set-node-os $McAllen Ubuntu1404-64-STD
 set Cologne [$ns node]
+tb-add-node-attribute $Cologne containers:node_type qemu
 tb-set-node-os $Cologne Ubuntu1404-64-STD
 set Milan [$ns node]
+tb-add-node-attribute $Milan containers:node_type qemu
 tb-set-node-os $Milan Ubuntu1404-64-STD
 set Manchester [$ns node]
+tb-add-node-attribute $Manchester containers:node_type qemu
 tb-set-node-os $Manchester Ubuntu1404-64-STD
 set Rouen [$ns node]
+tb-add-node-attribute $Rouen containers:node_type qemu
 tb-set-node-os $Rouen Ubuntu1404-64-STD
 set SanSebastian [$ns node]
+tb-add-node-attribute $SanSebastian containers:node_type qemu
 tb-set-node-os $SanSebastian Ubuntu1404-64-STD
 set Seattle [$ns node]
+tb-add-node-attribute $Seattle containers:node_type qemu
 tb-set-node-os $Seattle Ubuntu1404-64-STD
 set Jackson [$ns node]
+tb-add-node-attribute $Jackson containers:node_type qemu
 tb-set-node-os $Jackson Ubuntu1404-64-STD
 set Strasbourg [$ns node]
+tb-add-node-attribute $Strasbourg containers:node_type qemu
 tb-set-node-os $Strasbourg Ubuntu1404-64-STD
 set Dortmund [$ns node]
+tb-add-node-attribute $Dortmund containers:node_type qemu
 tb-set-node-os $Dortmund Ubuntu1404-64-STD
 set Hamburg [$ns node]
+tb-add-node-attribute $Hamburg containers:node_type qemu
 tb-set-node-os $Hamburg Ubuntu1404-64-STD
 set Boise [$ns node]
+tb-add-node-attribute $Boise containers:node_type qemu
 tb-set-node-os $Boise Ubuntu1404-64-STD
 set Guadalajara [$ns node]
+tb-add-node-attribute $Guadalajara containers:node_type qemu
 tb-set-node-os $Guadalajara Ubuntu1404-64-STD
 set Ljubljana [$ns node]
+tb-add-node-attribute $Ljubljana containers:node_type qemu
 tb-set-node-os $Ljubljana Ubuntu1404-64-STD
 set Slough [$ns node]
+tb-add-node-attribute $Slough containers:node_type qemu
 tb-set-node-os $Slough Ubuntu1404-64-STD
 set Vienna [$ns node]
+tb-add-node-attribute $Vienna containers:node_type qemu
 tb-set-node-os $Vienna Ubuntu1404-64-STD
 set Edinburgh [$ns node]
+tb-add-node-attribute $Edinburgh containers:node_type qemu
 tb-set-node-os $Edinburgh Ubuntu1404-64-STD
 set OrangeCounty [$ns node]
+tb-add-node-attribute $OrangeCounty containers:node_type qemu
 tb-set-node-os $OrangeCounty Ubuntu1404-64-STD
 set Pittsburgh [$ns node]
+tb-add-node-attribute $Pittsburgh containers:node_type qemu
 tb-set-node-os $Pittsburgh Ubuntu1404-64-STD
 set Constanta [$ns node]
+tb-add-node-attribute $Constanta containers:node_type qemu
 tb-set-node-os $Constanta Ubuntu1404-64-STD
 set Albuquerque [$ns node]
+tb-add-node-attribute $Albuquerque containers:node_type qemu
 tb-set-node-os $Albuquerque Ubuntu1404-64-STD
 set Bratislava [$ns node]
+tb-add-node-attribute $Bratislava containers:node_type qemu
 tb-set-node-os $Bratislava Ubuntu1404-64-STD
 set SanAntonio [$ns node]
+tb-add-node-attribute $SanAntonio containers:node_type qemu
 tb-set-node-os $SanAntonio Ubuntu1404-64-STD
 set Warsaw [$ns node]
+tb-add-node-attribute $Warsaw containers:node_type qemu
 tb-set-node-os $Warsaw Ubuntu1404-64-STD
 set Berlin [$ns node]
+tb-add-node-attribute $Berlin containers:node_type qemu
 tb-set-node-os $Berlin Ubuntu1404-64-STD
 set Leeds [$ns node]
+tb-add-node-attribute $Leeds containers:node_type qemu
 tb-set-node-os $Leeds Ubuntu1404-64-STD
 set London [$ns node]
+tb-add-node-attribute $London containers:node_type qemu
 tb-set-node-os $London Ubuntu1404-64-STD
 set LasVegas [$ns node]
+tb-add-node-attribute $LasVegas containers:node_type qemu
 tb-set-node-os $LasVegas Ubuntu1404-64-STD
 set Bern [$ns node]
+tb-add-node-attribute $Bern containers:node_type qemu
 tb-set-node-os $Bern Ubuntu1404-64-STD
 set Grenoble [$ns node]
+tb-add-node-attribute $Grenoble containers:node_type qemu
 tb-set-node-os $Grenoble Ubuntu1404-64-STD
 set MexicoCity [$ns node]
+tb-add-node-attribute $MexicoCity containers:node_type qemu
 tb-set-node-os $MexicoCity Ubuntu1404-64-STD
 set SouthBend [$ns node]
+tb-add-node-attribute $SouthBend containers:node_type qemu
 tb-set-node-os $SouthBend Ubuntu1404-64-STD
 set WhitePlains [$ns node]
+tb-add-node-attribute $WhitePlains containers:node_type qemu
 tb-set-node-os $WhitePlains Ubuntu1404-64-STD
 set StLouis [$ns node]
+tb-add-node-attribute $StLouis containers:node_type qemu
 tb-set-node-os $StLouis Ubuntu1404-64-STD
 set Kharkiv [$ns node]
+tb-add-node-attribute $Kharkiv containers:node_type qemu
 tb-set-node-os $Kharkiv Ubuntu1404-64-STD
 set Stuttgart [$ns node]
+tb-add-node-attribute $Stuttgart containers:node_type qemu
 tb-set-node-os $Stuttgart Ubuntu1404-64-STD
 set Alicante [$ns node]
+tb-add-node-attribute $Alicante containers:node_type qemu
 tb-set-node-os $Alicante Ubuntu1404-64-STD
 set Bologna [$ns node]
+tb-add-node-attribute $Bologna containers:node_type qemu
 tb-set-node-os $Bologna Ubuntu1404-64-STD
 set DesMoines [$ns node]
+tb-add-node-attribute $DesMoines containers:node_type qemu
 tb-set-node-os $DesMoines Ubuntu1404-64-STD
 set Frankfurt [$ns node]
+tb-add-node-attribute $Frankfurt containers:node_type qemu
 tb-set-node-os $Frankfurt Ubuntu1404-64-STD
 set KansasCity [$ns node]
+tb-add-node-attribute $KansasCity containers:node_type qemu
 tb-set-node-os $KansasCity Ubuntu1404-64-STD
 set Cambridge [$ns node]
+tb-add-node-attribute $Cambridge containers:node_type qemu
 tb-set-node-os $Cambridge Ubuntu1404-64-STD
 set Zurich [$ns node]
+tb-add-node-attribute $Zurich containers:node_type qemu
 tb-set-node-os $Zurich Ubuntu1404-64-STD
 set Madrid [$ns node]
+tb-add-node-attribute $Madrid containers:node_type qemu
 tb-set-node-os $Madrid Ubuntu1404-64-STD
 set Balchik [$ns node]
+tb-add-node-attribute $Balchik containers:node_type qemu
 tb-set-node-os $Balchik Ubuntu1404-64-STD
 set Tours [$ns node]
+tb-add-node-attribute $Tours containers:node_type qemu
 tb-set-node-os $Tours Ubuntu1404-64-STD
 set Essen [$ns node]
+tb-add-node-attribute $Essen containers:node_type qemu
 tb-set-node-os $Essen Ubuntu1404-64-STD
 set Lyon [$ns node]
+tb-add-node-attribute $Lyon containers:node_type qemu
 tb-set-node-os $Lyon Ubuntu1404-64-STD
 set Porto [$ns node]
+tb-add-node-attribute $Porto containers:node_type qemu
 tb-set-node-os $Porto Ubuntu1404-64-STD
 set Dallas [$ns node]
+tb-add-node-attribute $Dallas containers:node_type qemu
 tb-set-node-os $Dallas Ubuntu1404-64-STD
 set SanDiego [$ns node]
+tb-add-node-attribute $SanDiego containers:node_type qemu
 tb-set-node-os $SanDiego Ubuntu1404-64-STD
 set Munster [$ns node]
+tb-add-node-attribute $Munster containers:node_type qemu
 tb-set-node-os $Munster Ubuntu1404-64-STD
 set Burgas [$ns node]
+tb-add-node-attribute $Burgas containers:node_type qemu
 tb-set-node-os $Burgas Ubuntu1404-64-STD
 set Luxembourg [$ns node]
+tb-add-node-attribute $Luxembourg containers:node_type qemu
 tb-set-node-os $Luxembourg Ubuntu1404-64-STD
 set Providence [$ns node]
+tb-add-node-attribute $Providence containers:node_type qemu
 tb-set-node-os $Providence Ubuntu1404-64-STD
 set Louisville [$ns node]
+tb-add-node-attribute $Louisville containers:node_type qemu
 tb-set-node-os $Louisville Ubuntu1404-64-STD
 set Varna [$ns node]
+tb-add-node-attribute $Varna containers:node_type qemu
 tb-set-node-os $Varna Ubuntu1404-64-STD
 set Rotterdam [$ns node]
+tb-add-node-attribute $Rotterdam containers:node_type qemu
 tb-set-node-os $Rotterdam Ubuntu1404-64-STD
 set Nice [$ns node]
+tb-add-node-attribute $Nice containers:node_type qemu
 tb-set-node-os $Nice Ubuntu1404-64-STD
 set Columbus [$ns node]
+tb-add-node-attribute $Columbus containers:node_type qemu
 tb-set-node-os $Columbus Ubuntu1404-64-STD
 set Indianapolis [$ns node]
+tb-add-node-attribute $Indianapolis containers:node_type qemu
 tb-set-node-os $Indianapolis Ubuntu1404-64-STD
 set Boston [$ns node]
+tb-add-node-attribute $Boston containers:node_type qemu
 tb-set-node-os $Boston Ubuntu1404-64-STD
 set Dayton [$ns node]
+tb-add-node-attribute $Dayton containers:node_type qemu
 tb-set-node-os $Dayton Ubuntu1404-64-STD
 set Buffalo [$ns node]
+tb-add-node-attribute $Buffalo containers:node_type qemu
 tb-set-node-os $Buffalo Ubuntu1404-64-STD
 set Herndon [$ns node]
+tb-add-node-attribute $Herndon containers:node_type qemu
 tb-set-node-os $Herndon Ubuntu1404-64-STD
 set Denver [$ns node]
+tb-add-node-attribute $Denver containers:node_type qemu
 tb-set-node-os $Denver Ubuntu1404-64-STD
 set Helsinki [$ns node]
+tb-add-node-attribute $Helsinki containers:node_type qemu
 tb-set-node-os $Helsinki Ubuntu1404-64-STD
 set Baltimore [$ns node]
+tb-add-node-attribute $Baltimore containers:node_type qemu
 tb-set-node-os $Baltimore Ubuntu1404-64-STD
 set Memphis [$ns node]
+tb-add-node-attribute $Memphis containers:node_type qemu
 tb-set-node-os $Memphis Ubuntu1404-64-STD
 set Toronto [$ns node]
+tb-add-node-attribute $Toronto containers:node_type qemu
 tb-set-node-os $Toronto Ubuntu1404-64-STD
 set ColoradoSprings [$ns node]
+tb-add-node-attribute $ColoradoSprings containers:node_type qemu
 tb-set-node-os $ColoradoSprings Ubuntu1404-64-STD
 set Malaga [$ns node]
+tb-add-node-attribute $Malaga containers:node_type qemu
 tb-set-node-os $Malaga Ubuntu1404-64-STD
 set Logrono [$ns node]
+tb-add-node-attribute $Logrono containers:node_type qemu
 tb-set-node-os $Logrono Ubuntu1404-64-STD
 set Newcastle [$ns node]
+tb-add-node-attribute $Newcastle containers:node_type qemu
 tb-set-node-os $Newcastle Ubuntu1404-64-STD
 set Orlando [$ns node]
+tb-add-node-attribute $Orlando containers:node_type qemu
 tb-set-node-os $Orlando Ubuntu1404-64-STD
 set Detroit [$ns node]
+tb-add-node-attribute $Detroit containers:node_type qemu
 tb-set-node-os $Detroit Ubuntu1404-64-STD
 set Bilbao [$ns node]
+tb-add-node-attribute $Bilbao containers:node_type qemu
 tb-set-node-os $Bilbao Ubuntu1404-64-STD
 set Krakow [$ns node]
+tb-add-node-attribute $Krakow containers:node_type qemu
 tb-set-node-os $Krakow Ubuntu1404-64-STD
 set Stockholm [$ns node]
+tb-add-node-attribute $Stockholm containers:node_type qemu
 tb-set-node-os $Stockholm Ubuntu1404-64-STD
 set Bordeaux [$ns node]
+tb-add-node-attribute $Bordeaux containers:node_type qemu
 tb-set-node-os $Bordeaux Ubuntu1404-64-STD
 set Genoa [$ns node]
+tb-add-node-attribute $Genoa containers:node_type qemu
 tb-set-node-os $Genoa Ubuntu1404-64-STD
 set Austin [$ns node]
+tb-add-node-attribute $Austin containers:node_type qemu
 tb-set-node-os $Austin Ubuntu1404-64-STD
 set Greensboro [$ns node]
+tb-add-node-attribute $Greensboro containers:node_type qemu
 tb-set-node-os $Greensboro Ubuntu1404-64-STD
 set Bucharest [$ns node]
+tb-add-node-attribute $Bucharest containers:node_type qemu
 tb-set-node-os $Bucharest Ubuntu1404-64-STD
 set Toulouse [$ns node]
+tb-add-node-attribute $Toulouse containers:node_type qemu
 tb-set-node-os $Toulouse Ubuntu1404-64-STD
 set Montpellier [$ns node]
+tb-add-node-attribute $Montpellier containers:node_type qemu
 tb-set-node-os $Montpellier Ubuntu1404-64-STD
 set Worcester [$ns node]
+tb-add-node-attribute $Worcester containers:node_type qemu
 tb-set-node-os $Worcester Ubuntu1404-64-STD
 set Leon [$ns node]
+tb-add-node-attribute $Leon containers:node_type qemu
 tb-set-node-os $Leon Ubuntu1404-64-STD
 set Brno [$ns node]
+tb-add-node-attribute $Brno containers:node_type qemu
 tb-set-node-os $Brno Ubuntu1404-64-STD
 set Birmingham [$ns node]
+tb-add-node-attribute $Birmingham containers:node_type qemu
 tb-set-node-os $Birmingham Ubuntu1404-64-STD
 set Cleveland [$ns node]
+tb-add-node-attribute $Cleveland containers:node_type qemu
 tb-set-node-os $Cleveland Ubuntu1404-64-STD
 set Florence [$ns node]
+tb-add-node-attribute $Florence containers:node_type qemu
 tb-set-node-os $Florence Ubuntu1404-64-STD
 set Granada [$ns node]
+tb-add-node-attribute $Granada containers:node_type qemu
 tb-set-node-os $Granada Ubuntu1404-64-STD
 set Chicago [$ns node]
+tb-add-node-attribute $Chicago containers:node_type qemu
 tb-set-node-os $Chicago Ubuntu1404-64-STD
 set Queretaro [$ns node]
+tb-add-node-attribute $Queretaro containers:node_type qemu
 tb-set-node-os $Queretaro Ubuntu1404-64-STD
 set Antwerp [$ns node]
+tb-add-node-attribute $Antwerp containers:node_type qemu
 tb-set-node-os $Antwerp Ubuntu1404-64-STD
 set Philadelphia [$ns node]
+tb-add-node-attribute $Philadelphia containers:node_type qemu
 tb-set-node-os $Philadelphia Ubuntu1404-64-STD
 set MainzWiesbaden [$ns node]
+tb-add-node-attribute $MainzWiesbaden containers:node_type qemu
 tb-set-node-os $MainzWiesbaden Ubuntu1404-64-STD
 set Tallinn [$ns node]
+tb-add-node-attribute $Tallinn containers:node_type qemu
 tb-set-node-os $Tallinn Ubuntu1404-64-STD
 set PaduaVenice [$ns node]
+tb-add-node-attribute $PaduaVenice containers:node_type qemu
 tb-set-node-os $PaduaVenice Ubuntu1404-64-STD
 set Valencia [$ns node]
+tb-add-node-attribute $Valencia containers:node_type qemu
 tb-set-node-os $Valencia Ubuntu1404-64-STD
 set Galati [$ns node]
+tb-add-node-attribute $Galati containers:node_type qemu
 tb-set-node-os $Galati Ubuntu1404-64-STD
 set Glasgow [$ns node]
+tb-add-node-attribute $Glasgow containers:node_type qemu
 tb-set-node-os $Glasgow Ubuntu1404-64-STD
 set Odessa [$ns node]
+tb-add-node-attribute $Odessa containers:node_type qemu
 tb-set-node-os $Odessa Ubuntu1404-64-STD
 set Dresden [$ns node]
+tb-add-node-attribute $Dresden containers:node_type qemu
 tb-set-node-os $Dresden Ubuntu1404-64-STD
 set Geneva [$ns node]
+tb-add-node-attribute $Geneva containers:node_type qemu
 tb-set-node-os $Geneva Ubuntu1404-64-STD
 set Zagreb [$ns node]
+tb-add-node-attribute $Zagreb containers:node_type qemu
 tb-set-node-os $Zagreb Ubuntu1404-64-STD
 set Nashville [$ns node]
+tb-add-node-attribute $Nashville containers:node_type qemu
 tb-set-node-os $Nashville Ubuntu1404-64-STD
 set Munich [$ns node]
+tb-add-node-attribute $Munich containers:node_type qemu
 tb-set-node-os $Munich Ubuntu1404-64-STD
 set Harrisburg [$ns node]
+tb-add-node-attribute $Harrisburg containers:node_type qemu
 tb-set-node-os $Harrisburg Ubuntu1404-64-STD
 set SaltLakeCity [$ns node]
+tb-add-node-attribute $SaltLakeCity containers:node_type qemu
 tb-set-node-os $SaltLakeCity Ubuntu1404-64-STD
 set Laredo [$ns node]
+tb-add-node-attribute $Laredo containers:node_type qemu
 tb-set-node-os $Laredo Ubuntu1404-64-STD
 set Jacksonville [$ns node]
+tb-add-node-attribute $Jacksonville containers:node_type qemu
 tb-set-node-os $Jacksonville Ubuntu1404-64-STD
 set Budapest [$ns node]
+tb-add-node-attribute $Budapest containers:node_type qemu
 tb-set-node-os $Budapest Ubuntu1404-64-STD
 set Dijon [$ns node]
+tb-add-node-attribute $Dijon containers:node_type qemu
 tb-set-node-os $Dijon Ubuntu1404-64-STD
 set Omaha [$ns node]
+tb-add-node-attribute $Omaha containers:node_type qemu
 tb-set-node-os $Omaha Ubuntu1404-64-STD
 set Reims [$ns node]
+tb-add-node-attribute $Reims containers:node_type qemu
 tb-set-node-os $Reims Ubuntu1404-64-STD
 set Murcia [$ns node]
+tb-add-node-attribute $Murcia containers:node_type qemu
 tb-set-node-os $Murcia Ubuntu1404-64-STD
 set Dusseldorf [$ns node]
+tb-add-node-attribute $Dusseldorf containers:node_type qemu
 tb-set-node-os $Dusseldorf Ubuntu1404-64-STD
 set Barcelona [$ns node]
+tb-add-node-attribute $Barcelona containers:node_type qemu
 tb-set-node-os $Barcelona Ubuntu1404-64-STD
 set Raleigh [$ns node]
+tb-add-node-attribute $Raleigh containers:node_type qemu
 tb-set-node-os $Raleigh Ubuntu1404-64-STD
 set Amsterdam [$ns node]
+tb-add-node-attribute $Amsterdam containers:node_type qemu
 tb-set-node-os $Amsterdam Ubuntu1404-64-STD
 set Rennes [$ns node]
+tb-add-node-attribute $Rennes containers:node_type qemu
 tb-set-node-os $Rennes Ubuntu1404-64-STD
 set Portland [$ns node]
+tb-add-node-attribute $Portland containers:node_type qemu
 tb-set-node-os $Portland Ubuntu1404-64-STD
 set Sophia [$ns node]
+tb-add-node-attribute $Sophia containers:node_type qemu
 tb-set-node-os $Sophia Ubuntu1404-64-STD
 set Houston [$ns node]
+tb-add-node-attribute $Houston containers:node_type qemu
 tb-set-node-os $Houston Ubuntu1404-64-STD
 set Phoenix [$ns node]
+tb-add-node-attribute $Phoenix containers:node_type qemu
 tb-set-node-os $Phoenix Ubuntu1404-64-STD
 set LiverpoolSouthport [$ns node]
+tb-add-node-attribute $LiverpoolSouthport containers:node_type qemu
 tb-set-node-os $LiverpoolSouthport Ubuntu1404-64-STD
 set Prague [$ns node]
+tb-add-node-attribute $Prague containers:node_type qemu
 tb-set-node-os $Prague Ubuntu1404-64-STD
 set Sofia [$ns node]
+tb-add-node-attribute $Sofia containers:node_type qemu
 tb-set-node-os $Sofia Ubuntu1404-64-STD
 set ElPaso [$ns node]
+tb-add-node-attribute $ElPaso containers:node_type qemu
 tb-set-node-os $ElPaso Ubuntu1404-64-STD
 set FortWorth [$ns node]
+tb-add-node-attribute $FortWorth containers:node_type qemu
 tb-set-node-os $FortWorth Ubuntu1404-64-STD
 set Stamford [$ns node]
+tb-add-node-attribute $Stamford containers:node_type qemu
 tb-set-node-os $Stamford Ubuntu1404-64-STD
 set Lisbon [$ns node]
+tb-add-node-attribute $Lisbon containers:node_type qemu
 tb-set-node-os $Lisbon Ubuntu1404-64-STD
 set Milwaukee [$ns node]
+tb-add-node-attribute $Milwaukee containers:node_type qemu
 tb-set-node-os $Milwaukee Ubuntu1404-64-STD
 set Copenhagen [$ns node]
+tb-add-node-attribute $Copenhagen containers:node_type qemu
 tb-set-node-os $Copenhagen Ubuntu1404-64-STD
 set Oakland [$ns node]
+tb-add-node-attribute $Oakland containers:node_type qemu
 tb-set-node-os $Oakland Ubuntu1404-64-STD
 set Arezzo [$ns node]
+tb-add-node-attribute $Arezzo containers:node_type qemu
 tb-set-node-os $Arezzo Ubuntu1404-64-STD
 
 #Links
