@@ -2,7 +2,7 @@
 
 1) graph_to_mininet.py
 
-Screipt is used to convert GraphML file into a mininet topology file. Topology Zoo provides several topologies in the GrpahML form. You can find the different topologies here.
+Script is used to convert GraphML file into a mininet topology file. Topology Zoo provides several topologies in the GrpahML form. You can find the different topologies here.
 
 Input
 
@@ -33,7 +33,7 @@ This script is used to check if all the nodes which are setup in the experiment 
 
 5) Setting up the controller
 
-Installl the dependencies
+Install the dependencies for controller
 sudo python ryu_dependnties/install.py
 
 Install RYU
@@ -46,25 +46,43 @@ sudo ryu-manager ofctl_rest.py --ofp-list-host {ip_of_controller}
 
 Install Apache
 sudo apt-get install apache2 php5
-
 sudo cp -r apache_files/* /var/www/html
 
-5)switch_setup.py
+5)setup.py
 
 Script is used to install OpenvSwitch and Quagga on nodes. Make sure that the controller is running. You could access the controller,
 ssh controller.experiment_name.project_name
 
 python setup.py controller_ip
 
-6)Accesing the SENSS server
+
+SENSS
+
+SENSS Server
 
 ssh user_name@users.deterlab.net -L 8118:controller.experiment_name.project_name.isi.deterlab.net:80
 
-To access the Client GUI:-
-http://localhost:8181/direct_floods_form.php
-
 To access the Server GUI:-
 http://localhost:8181/index.php
+
+Functionalities:-
+
+Add Switch
+
+Add a new switch to the existing topology. 
+Name of the switch - Used for logging. In the case of a switch between Alabama(unique_number is 2) and Los Angeles(unique_number is 5) , the name of the switch is i2a5
+
+Switch Username - Username of the node in deterlab running the switch
+
+Switch Password - Password of the node in deterlab running the switch
+
+Controller IP - IP address in which the controller is running
+
+Controller Port - Port at which the controller is running
+
+
+
+
 
 7)Server GUI
 
